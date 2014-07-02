@@ -1,21 +1,21 @@
 % rubber: set program xelatex
-\documentclass[18pt]{beamer}
+\documentclass[18pt,mathserif]{beamer}
 
 %{{{ Settings
 \usetheme[english, titlepage0]{KIT}
 
 %{{{ Packages
 \usepackage{tikz}
-\usepackage{xltxtra}
+%\usepackage{xltxtra}
 \usepackage{csquotes}
 \usepackage{caption}
 \usepackage{hyperref}
 \usepackage[framemethod=tikz]{mdframed}
 %}}}
 %{{{ Fonts and colors
-\setsansfont[Mapping=tex-text,
-             BoldFont={* Semibold}]{Source Sans Pro}
-\setmonofont[UprightFeatures={LetterSpace=-0.5}]{Inconsolata}
+%\setsansfont[Mapping=tex-text,
+%             BoldFont={* Semibold}]{Source Sans Pro}
+%\setmonofont[UprightFeatures={LetterSpace=-0.5}]{Inconsolata}
 
 % TomorrowTheme: https://github.com/chriskempson/tomorrow-theme/blob/master/vim/colors/Tomorrow.vim
 \definecolor{syntax-comment}{HTML}{8e908c}
@@ -226,7 +226,7 @@
 \begin{frame}{}
   \begin{center}
     \huge\bfseries
-    \textcolor{KITblack50}{Git basics}
+    \textcolor{KITblack}{Git basics}
   \end{center}
 \end{frame}
 \begin{frame}{Getting started}
@@ -439,7 +439,7 @@ So, before committing you have to stage a file
 \begin{frame}{}
   \begin{center}
     \huge\bfseries
-    \textcolor{KITblack50}{Advanced Git operations}
+    \textcolor{KITblack}{Advanced Git operations}
   \end{center}
 \end{frame}
 \begin{frame}{Manipulating the Git object database}
@@ -578,14 +578,14 @@ So, before committing you have to stage a file
 
         % Squash commits
         \visible<1-3>{
-          \node[commit, fill=KITgreen50] (c5) at (0,4) {};
-          \node[commit, fill=KITyellow50] (c4) at (0,3) {};
+          \node[commit, fill=KITgreen] (c5) at (0,4) {};
+          \node[commit, fill=KITyellow] (c4) at (0,3) {};
           \draw[connection] (c4) -- (c5);
         }
 
         \visible<4->{
           \node[shape=circle split, commit,
-                circle split part fill={KITgreen50,KITyellow50}] (c4) at (0,3)
+                circle split part fill={KITgreen,KITyellow}] (c4) at (0,3)
               {\nodepart{lower}};
         }
 
@@ -608,7 +608,7 @@ So, before committing you have to stage a file
 \begin{frame}{}
   \begin{center}
     \huge\bfseries
-    \textcolor{KITblack50}{Beyond version control}
+    \textcolor{KITblack}{Beyond version control}
   \end{center}
 \end{frame}
 \begin{frame}{Deployment, Continous Integration}
@@ -702,7 +702,7 @@ So, before committing you have to stage a file
   \vfill
   \begin{center}
     \huge\bfseries
-    \textcolor{KITblack50}{Thanks for your attention!}
+    \textcolor{KITblack}{Thanks for your attention!}
   \end{center}
 
   \vfill
