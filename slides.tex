@@ -229,18 +229,18 @@
     \textcolor{KITblack}{Git basics}
   \end{center}
 \end{frame}
-\begin{frame}{Getting started}
-  \begin{block}{Installation}
-    \begin{itemize}
-      \item Debian/Ubuntu: \texttt{apt-get install git-core}
-      \item openSUSE/SLES: \texttt{zypper install git-core}
-      \item Fedora/RHEL/CentOS/SL: \texttt{yum install git}
-      \item Mac: \texttt{port install git-core} or install from
-      \url{http://git-scm.com/download/mac}
-      \item Windows: install from \url{http://git-scm.com/download/win}
-    \end{itemize}
-  \end{block}
-\end{frame}
+%\begin{frame}{Getting started}
+  %\begin{block}{Installation}
+    %\begin{itemize}
+      %\item Debian/Ubuntu: \texttt{apt-get install git-core}
+      %\item openSUSE/SLES: \texttt{zypper install git-core}
+      %\item Fedora/RHEL/CentOS/SL: \texttt{yum install git}
+      %\item Mac: \texttt{port install git-core} or install from
+      %\url{http://git-scm.com/download/mac}
+      %\item Windows: install from \url{http://git-scm.com/download/win}
+    %\end{itemize}
+  %\end{block}
+%\end{frame}
 \begin{frame}{Creating a new repository}
   In the working directory of your project, type
   \begin{shell}
@@ -417,22 +417,22 @@ So, before committing you have to stage a file
     \end{shell}
   \end{block}
 \end{frame}
-\begin{frame}{Hosting repositories}
-  \begin{itemize}
-    \item Some directory on a file share such as NFS
-    \item Simple SSH-based access or Gitolite
-    \item Third-party provider, e.g. GitHub, Bitbucket, Google Code,
-      SourceForge\ldots
-  \end{itemize}
-\end{frame}
-\begin{frame}{Best practices}
-  \begin{itemize}
-    \item Write descriptive commit messages and keep 50/70 limits
-    \item Check the status before committing
-    \item Think twice before running
-      \begin{shell}\$ git commit -a\end{shell}
-  \end{itemize}
-\end{frame}
+%\begin{frame}{Hosting repositories}
+  %\begin{itemize}
+    %\item Some directory on a file share such as NFS
+    %\item Simple SSH-based access or Gitolite
+    %\item Third-party provider, e.g. GitHub, Bitbucket, Google Code,
+      %SourceForge\ldots
+  %\end{itemize}
+%\end{frame}
+%\begin{frame}{Best practices}
+  %\begin{itemize}
+    %\item Write descriptive commit messages and keep 50/70 limits
+    %\item Check the status before committing
+    %\item Think twice before running
+      %\begin{shell}\$ git commit -a\end{shell}
+  %\end{itemize}
+%\end{frame}
 
 \section{Advanced Git features}
 
@@ -603,79 +603,79 @@ So, before committing you have to stage a file
 \end{frame}
 
 
-\section{Beyond Source Control}
+%\section{Beyond Source Control}
 
-\begin{frame}{}
-  \begin{center}
-    \huge\bfseries
-    \textcolor{KITblack}{Beyond version control}
-  \end{center}
-\end{frame}
-\begin{frame}{Deployment, Continous Integration}
-  \begin{block}{post-receive hooks}
-    \begin{description}
-      \item[what] Use post-receive hooks to trigger actions, e.g. running
-        builds and tests, deploy software, \ldots
-      \item[where] \texttt{\$REPO/.git/hooks}
-      \item[score]\score{1}{5}
-    \end{description}
-  \end{block}
-\end{frame}
-\begin{frame}{Blogging}
-  \begin{block}{GitHub pages + Jekyll}
-    \begin{description}
-      \item[what] Blog hosting on GitHub via Git and Jekyll
-      \item[where] \url{pages.github.com}
-      \item[score]\score{2}{5}
-    \end{description}
-  \end{block}
-\end{frame}
-\begin{frame}{Wiki}
-  \begin{block}{Gollum + Smeagol}
-    \begin{description}
-      \item[what] Git backend for a wiki with Markdown formatting
-      \item[where] \url{github.com/gollum/gollum} and
-        \url{github.com/rubyworks/smeagol}
-      \item[score]\score{2}{5}
-    \end{description}
-  \end{block}
-\end{frame}
-\begin{frame}{Backups}
-  \begin{block}{Bup}
-    \begin{description}
-      \item[what] Uses Git's packfile format to store backups
-      \item[where] \url{github.com/bup/bup}
-      \item[score]\score{2}{5}
-    \end{description}
-  \end{block}
-\end{frame}
-\begin{frame}{Managing large files}
-  \begin{block}{git-annex}
-    \begin{description}
-      \item[what] Manages large data sets across remotes
-      \item[where] \url{git-annex.branchable.com}
-      \item[score]\score{4}{5}
-    \end{description}
-  \end{block}
-\end{frame}
-\begin{frame}{Bug tracking}
-  \begin{block}{ticgit}
-    \begin{description}
-      \item[what] Keep tickets in a separate branch and sync across repos
-      \item[where] \url{github.com/jeffWelling/ticgit}
-      \item[score]\score{4}{5}
-    \end{description}
-  \end{block}
-\end{frame}
-\begin{frame}{Text-based slides}
-  \begin{block}{git-slides}
-    \begin{description}
-      \item[what] git-slides (together with Vim)
-      \item[where] \url{github.com/gelisam/git-slides}
-      \item[score]\score{5}{5}
-    \end{description}
-  \end{block}
-\end{frame}
+%\begin{frame}{}
+  %\begin{center}
+    %\huge\bfseries
+    %\textcolor{KITblack}{Beyond version control}
+  %\end{center}
+%\end{frame}
+%\begin{frame}{Deployment, Continous Integration}
+  %\begin{block}{post-receive hooks}
+    %\begin{description}
+      %\item[what] Use post-receive hooks to trigger actions, e.g. running
+        %builds and tests, deploy software, \ldots
+      %\item[where] \texttt{\$REPO/.git/hooks}
+      %\item[score]\score{1}{5}
+    %\end{description}
+  %\end{block}
+%\end{frame}
+%\begin{frame}{Blogging}
+  %\begin{block}{GitHub pages + Jekyll}
+    %\begin{description}
+      %\item[what] Blog hosting on GitHub via Git and Jekyll
+      %\item[where] \url{pages.github.com}
+      %\item[score]\score{2}{5}
+    %\end{description}
+  %\end{block}
+%\end{frame}
+%\begin{frame}{Wiki}
+  %\begin{block}{Gollum + Smeagol}
+    %\begin{description}
+      %\item[what] Git backend for a wiki with Markdown formatting
+      %\item[where] \url{github.com/gollum/gollum} and
+        %\url{github.com/rubyworks/smeagol}
+      %\item[score]\score{2}{5}
+    %\end{description}
+  %\end{block}
+%\end{frame}
+%\begin{frame}{Backups}
+  %\begin{block}{Bup}
+    %\begin{description}
+      %\item[what] Uses Git's packfile format to store backups
+      %\item[where] \url{github.com/bup/bup}
+      %\item[score]\score{2}{5}
+    %\end{description}
+  %\end{block}
+%\end{frame}
+%\begin{frame}{Managing large files}
+  %\begin{block}{git-annex}
+    %\begin{description}
+      %\item[what] Manages large data sets across remotes
+      %\item[where] \url{git-annex.branchable.com}
+      %\item[score]\score{4}{5}
+    %\end{description}
+  %\end{block}
+%\end{frame}
+%\begin{frame}{Bug tracking}
+  %\begin{block}{ticgit}
+    %\begin{description}
+      %\item[what] Keep tickets in a separate branch and sync across repos
+      %\item[where] \url{github.com/jeffWelling/ticgit}
+      %\item[score]\score{4}{5}
+    %\end{description}
+  %\end{block}
+%\end{frame}
+%\begin{frame}{Text-based slides}
+  %\begin{block}{git-slides}
+    %\begin{description}
+      %\item[what] git-slides (together with Vim)
+      %\item[where] \url{github.com/gelisam/git-slides}
+      %\item[score]\score{5}{5}
+    %\end{description}
+  %\end{block}
+%\end{frame}
 
 
 \section{Appendix}
