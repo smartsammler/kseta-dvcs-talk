@@ -268,7 +268,7 @@
 
 \begin{frame}{Single User Workflow}
   \begin{enumerate}
-    \item Create a repository
+    \item Create a repository and a branch ``master''
       \begin{shell}
         \$ git init
       \end{shell}
@@ -342,6 +342,11 @@
         \$ git merge featureA  \# fast forward\\
         \$ git merge featureB  \# merge
       \end{shell}
+    \item Delete merged branches
+      \begin{shell}
+        \$ git branch -d featureA\\
+        \$ git branch -d featureB
+      \end{shell}
   \end{itemize}
 \end{frame}
 
@@ -359,10 +364,157 @@
       \begin{shell}
         \$ git checkout <paste SHA key>
       \end{shell}
-    \item Note that this does \emph{not change your branch}
+      Note that this does \emph{not change your branch}
+    \item Reset your master to the old version
+      \begin{shell}
+        \$ git reset --hard <paste SHA key>
+      \end{shell}
   \end{enumerate}
 \end{frame}
 
+\begin{frame}{}
+  \begin{center}
+    \huge\bfseries
+    \textcolor{KITblack}{Collaboration}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Cloning}
+  \begin{enumerate}
+    \item Clone a repository
+      \begin{shell}
+        \$ git clone Repository-URL
+      \end{shell}
+    \item Copies the complete history of all branches to your disk
+    \item Stores the cloning source as the \emph{remote} ``origin''
+      \begin{shell}
+        \$ git remote show\\
+        \$ git remote show origin
+      \end{shell}
+    \item \ldots{} now work as described before
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Incorporate Changes of Collaborators}
+  \begin{enumerate}
+    \item Fetch what others have done
+      \begin{shell}
+        \$ git fetch
+      \end{shell}
+      Downloads all commits and labels (e.g. ``origin/master'') from the
+      server, but leaves local labels unchanged.
+    \item Decide what to do:
+      \begin{itemize}
+         \item Cherry-pick a commit from a different branch
+         \item Fast-forward your branch if you did not make changes
+         \item Merge a remote branch into your branch
+         \item Rebase your branch on top of a remote branch
+      \end{itemize}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Cherry-Picking}
+  \begin{itemize}
+    \item Take a commit from another branch and apply it to yours as well
+      \begin{shell}
+        \$ git cherry-pick <SHA>
+      \end{shell}
+    \item Pre-condition is that you did not change same lines
+    \item Git keeps track of commits by SHA and can ignore double commits
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Fast-Forward}
+  \begin{itemize}
+    \item Moves your branch label (e.g. ``master'') to the current tip (e.g.
+      ``origin/master'') of the branch
+      \begin{shell}
+        \$ git merge --ff-only origin/branchname
+      \end{shell}
+    \item Pre-condition is that you did not make any (diverging) commits
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Merge Other Branch Into Yours}
+  \begin{itemize}
+    \item Creates new commit which includes both changes
+      \begin{shell}
+        \$ git merge origin/master
+      \end{shell}
+    \item Almost always works, but may result in conflicts if same lines
+      changed in both branch heads
+    \item Note that you can also do
+      \begin{shell}
+        \$ git pull
+      \end{shell}
+      which is the same as a \emph{fetch} and a consecutive \emph{merge}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Rebase Your Branch on Other Branch}
+  \begin{itemize}
+    \item Most complex operation in git:
+      \begin{shell}
+        \$ git rebase origin/master
+      \end{shell}
+    \item Detach a commit from its parent and attach it to another commit
+    \item Pre-condition is that changes can be applied to new parent
+    \item Pro: Does not result in a merge-commit
+    \item Contra: May create cascades of conflicts during rebase
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{If Something Goes Wrong}
+  Things go wrong if changes conflict. You can then:
+  \begin{enumerate}
+    \item Fix the conflicts, then
+      \begin{shell}
+        \$ git add <changed files>\\
+        \$ git \{rebase|merge|...\} --continue
+      \end{shell}
+    \item Stop the operation
+      \begin{shell}
+        \$ git \{rebase|merge|...\} --abort
+      \end{shell}
+    \item Undo broken rebases, merges etc:
+      \begin{shell}
+        \$ git reflog\\
+        \$ git checkout HEAD@\{1\}
+      \end{shell}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Stashing Your Work}
+  \begin{itemize}
+    \item Get rid of uncommitted changes temporarily
+      \begin{shell}
+        \$ git stash
+      \end{shell}
+    \item Resets your working copy to the last committed version $C$
+    \item Creates a ``stash commit'' whose parent is $C$
+    \item Puts the stash commit on a stack
+    \item Top-most stash commit can be applied again using
+      \begin{shell}
+        \$ git stash pop
+      \end{shell}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Distributing Your Changes}
+  \begin{itemize}
+    \item Upload changes in your branch ``featureA'' to origin
+      \begin{shell}
+        \$ git push origin featureA
+      \end{shell}
+    \item Does not work if featureA is changed on origin, in this case fetch
+      and merge/rebase first
+    \item Does not work if you deleted commits which were on origin, in this
+      case force the update (be careful!):
+      \begin{shell}
+        \$ git push -f origin featureA
+      \end{shell}
+  \end{itemize}
+\end{frame}
 
 \begin{frame}{Creating a new repository}
   In the working directory of your project, type
