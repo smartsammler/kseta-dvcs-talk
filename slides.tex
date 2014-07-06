@@ -241,6 +241,129 @@
     %\end{itemize}
   %\end{block}
 %\end{frame}
+
+\begin{frame}{Commits}
+  Everytime you make a major change, you create a \alert{commit} containing:
+  \begin{itemize}
+    \item added/removed lines in files
+    \item a comment summarizing what was changed
+    \item an author
+    \item a date
+    \item a checksum (SHA-hash)
+    \item a reference to the previous state of your files (parent(s))
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Commit Graphs}
+  Since most commits have a parent, they form a \alert{directed graph} without
+  cycles (DAG).
+
+  \begin{itemize}
+    \item The first commit does not have a parent. It creates a \alert{repository}.
+    \item Multiple commits can have the same parent (e.g. when coworkers work on the same code).
+    \item Commits can have multiple parents if the two diverging changes are merged.
+    \item Commits can have \alert{labels}. Labels can be e.g. branch names version tags.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Single User Workflow}
+  \begin{enumerate}
+    \item Create a repository
+      \begin{shell}
+        \$ git init
+      \end{shell}
+    \item Create a commit
+      \begin{enumerate}
+        \item Add something to the commit
+          \begin{shell}
+            \$ git add README.txt
+          \end{shell}
+        \item Perform the commit
+          \begin{shell}
+            \$ git commit -m "Added a README file"
+          \end{shell}
+      \end{enumerate}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Single User Workflow}
+  \begin{enumerate}
+    \item Change something, and inspect the difference to the last commit
+      \begin{shell}
+        \$ vi README.txt\\
+        \$ git diff\\
+      \end{shell}
+    \item Create a commit (as before)
+      \begin{enumerate}
+        \item Add some changes to the commit
+          \begin{shell}
+            \$ git add README.txt
+          \end{shell}
+        \item Perform the commit
+          \begin{shell}
+            \$ git commit -m "Added Copyright notice to README"
+          \end{shell}
+      \end{enumerate}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{When to commit}
+  \begin{itemize}
+    \item Small logical units
+    \item About 3 times an hour
+    \item Allows you to retrace your steps
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Branching}
+  \begin{itemize}
+    \item Working on independent features at the same time
+    \item Trying incompatible changes
+    \item Quick and dirty work for a paper
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Branching}
+  \begin{itemize}
+    \item Create two branches from master
+      \begin{shell}
+        \$ git checkout master\\
+        \$ git checkout -b featureA\\
+        \$ ...change \& commit something\\
+        \$ git checkout -b featureB\\
+        \$ ...change \& commit something
+      \end{shell}
+    \item Switch back to master branch
+      \begin{shell}
+        \$ git checkout master
+      \end{shell}
+    \item Merge your changes into master
+      \begin{shell}
+        \$ git merge featureA  \# fast forward\\
+        \$ git merge featureB  \# merge
+      \end{shell}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Retracing Your Steps}
+  \begin{enumerate}
+    \item Check the log
+      \begin{shell}
+        \$ git log  \# copy the SHA-key
+      \end{shell}
+    \item Show changes to current version
+      \begin{shell}
+        \$ git diff <paste SHA key>
+      \end{shell}
+    \item Check out old version
+      \begin{shell}
+        \$ git checkout <paste SHA key>
+      \end{shell}
+    \item Note that this does \emph{not change your branch}
+  \end{enumerate}
+\end{frame}
+
+
 \begin{frame}{Creating a new repository}
   In the working directory of your project, type
   \begin{shell}
