@@ -1,5 +1,5 @@
 SRC=$(wildcard *.tex)
-OPTS=--pdf
+OPTS=--pdf -I KIT
 
 .PHONY: clean
 

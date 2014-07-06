@@ -255,7 +255,7 @@
 \end{frame}
 
 \begin{frame}{Commit Graphs}
-  Since most commits have a parent, they form a \alert{directed graph} without
+  Since all commits have a parent, they form a \alert{directed graph} without
   cycles (DAG).
 
   \begin{itemize}
@@ -284,27 +284,33 @@
           \end{shell}
       \end{enumerate}
   \end{enumerate}
+  \includegraphics[width=\linewidth]{pics/init0.png}
 \end{frame}
 
-\begin{frame}{Single User Workflow}
+\begin{frame}[t]{Single User Workflow}
   \begin{enumerate}
-    \item Change something, and inspect the difference to the last commit
+    \item<alert@1> Change something, and inspect the difference to the last commit
       \begin{shell}
         \$ vi README.txt\\
         \$ git diff\\
       \end{shell}
     \item Create a commit (as before)
       \begin{enumerate}
-        \item Add some changes to the commit
+        \item<alert@2> Add some changes to the commit
           \begin{shell}
             \$ git add README.txt
           \end{shell}
-        \item Perform the commit
+        \item<alert@3> Perform the commit
           \begin{shell}
-            \$ git commit -m "Added Copyright notice to README"
+            \$ git commit -m "Added project description"
           \end{shell}
       \end{enumerate}
   \end{enumerate}
+  \begin{overprint}
+  \includegraphics<1>[width=\linewidth]{pics/commit0.png}
+  \includegraphics<2>[width=\linewidth]{pics/commit1.png}
+  \includegraphics<3>[width=\linewidth]{pics/commit2.png}
+    \end{overprint}
 \end{frame}
 
 \begin{frame}{When to commit}
@@ -323,31 +329,49 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Branching}
-  \begin{itemize}
-    \item Create two branches from master
-      \begin{shell}
-        \$ git checkout master\\
-        \$ git checkout -b featureA\\
-        \$ ...change \& commit something\\
-        \$ git checkout -b featureB\\
-        \$ ...change \& commit something
-      \end{shell}
-    \item Switch back to master branch
-      \begin{shell}
-        \$ git checkout master
-      \end{shell}
-    \item Merge your changes into master
-      \begin{shell}
-        \$ git merge featureA  \# fast forward\\
-        \$ git merge featureB  \# merge
-      \end{shell}
-    \item Delete merged branches
-      \begin{shell}
-        \$ git branch -d featureA\\
-        \$ git branch -d featureB
-      \end{shell}
-  \end{itemize}
+\begin{frame}[t]{Branching}
+    \begin{itemize}
+        \item Create two branches from master
+            \begin{shell}
+                \alert<1>{\$ git checkout master}\\
+                \alert<2>{\$ git checkout -b featureA}\\
+                \alert<2>{\$ ...change \& commit something}\\
+                \alert<3>{\$ git checkout master}\\
+                \alert<4>{\$ git checkout -b featureB}\\
+                \alert<5>{\$ ...change \& commit something}
+            \end{shell}
+    \end{itemize}
+    \mbox{%
+    \includegraphics<1>[width=\linewidth]{pics/commit2.png}
+    \includegraphics<2>[width=\linewidth]{pics/branching1.png}
+    \includegraphics<3>[width=\linewidth]{pics/branching2.png}
+    \includegraphics<4>[width=\linewidth]{pics/branching3.png}
+    \includegraphics<5>[width=\linewidth]{pics/branching4.png}
+    }
+\end{frame}
+
+\begin{frame}[t]{Branching}
+    \begin{itemize}
+        \item Switch back to master branch
+            \begin{shell}
+                \alert<1>{\$ git checkout master}
+            \end{shell}
+        \item Merge your changes into master
+            \begin{shell}
+                \alert<2>{\$ git merge featureA  \# fast forward}\\
+                \alert<3>{\$ git merge featureB  \# merge}
+            \end{shell}
+        \item Delete merged branches
+            \begin{shell}
+                \alert<4>{\$ git branch -d featureA}\\
+                \alert<4>{\$ git branch -d featureB}
+            \end{shell}
+    \end{itemize}
+    \mbox{%
+    \includegraphics<1>[width=\linewidth]{pics/branching5.png}
+    \includegraphics<2>[width=\linewidth]{pics/branching6.png}
+    \includegraphics<3>[width=\linewidth]{pics/branching7.png}
+    \includegraphics<4>[width=\linewidth]{pics/branching8.png}}
 \end{frame}
 
 \begin{frame}{Retracing Your Steps}
