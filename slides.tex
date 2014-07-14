@@ -145,14 +145,12 @@
   \end{itemize}
 \end{frame}
 \begin{frame}{Version control}
-  \begin{block}{Benefits}
-    \begin{itemize}
-      \item \emph{Track} files
-      \item Record (\emph{commit}) changes
-      \item Share changes with others
-      \item Roll-back to an earlier state
-    \end{itemize}
-  \end{block}
+	\begin{itemize}
+		\item \emph{Track} files
+		\item Record (\emph{commit}) changes
+		\item Share changes with others
+		\item Roll-back to an earlier state
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Why Git?}
@@ -202,6 +200,8 @@
 	\includegraphics[width=.8\linewidth]{pics/init0.png}
 	\end{center}
 \end{frame}
+
+% Live Demo 1
 
 \begin{frame}{Commits}
   Everytime you make a major change, you create a \alert{commit} containing:
@@ -253,12 +253,14 @@
     \end{overprint}
 \end{frame}
 
-\begin{frame}{When to commit}
+\begin{frame}{How to commit}
   \begin{itemize}
     \item Small logical units
-    \item About 3 times an hour \\
-		\item[$\Rightarrow$] Allows you to retrace your steps
+    \item About 3 times an hour 
 			%TODO: add pic
+    \item Check the status before committing
+    \item Write descriptive commit messages and keep 50/70 limits
+		\item[$\Rightarrow$] Allows you to retrace your steps
    \end{itemize}
  \end{frame}
 
@@ -335,6 +337,8 @@
   \end{enumerate}
 \end{frame}
 
+% Live Demo 2
+
 \begin{frame}{}
   \begin{center}
     \huge\bfseries
@@ -393,6 +397,43 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}{If Something Goes Wrong}
+  Things go wrong if changes conflict. You can then:
+  \begin{enumerate}
+    \item Fix the conflicts, then
+      \begin{shell}
+        \$ git add <changed files>\\
+        \$ git merge --continue
+      \end{shell}
+    \item Stop the operation
+      \begin{shell}
+        \$ git merge --abort
+      \end{shell}
+    \item Undo broken merges:
+			% TODO: screenshot fuer reflog
+      \begin{shell}
+        \$ git reflog\\
+        \$ git checkout HEAD@\{1\}
+      \end{shell}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Distributing Your Changes}
+  \begin{itemize}
+    \item Upload changes in your branch ``featureA'' to origin
+      \begin{shell}
+        \$ git push origin featureA
+      \end{shell}
+    \item Does not work if featureA is changed on origin, in this case fetch
+      and merge/rebase first
+    \item Does not work if you deleted commits which were on origin, in this
+      case force the update (be careful!):
+      \begin{shell}
+        \$ git push -f origin featureA
+      \end{shell}
+  \end{itemize}
+\end{frame}
+
 \begin{frame}
 	\frametitle{Best Practice Workflow}
 	\includegraphics[height=\textheight]{images/master-develop-feature-branches.png}
@@ -400,6 +441,40 @@
 \end{frame}
 
 
+%\begin{frame}{Best practices}
+%\end{frame}
+
+% after group session
+\section{Advanced Git Features}
+
+\begin{frame}{}
+  \begin{center}
+    \huge\bfseries
+    \textcolor{KITblack}{Advanced Git Operations}
+  \end{center}
+\end{frame}
+
+% TODO 
+% gitk
+% git gui
+
+% multiple remotes (pull workflow)
+
+\begin{frame}{Stashing Your Work}
+  \begin{itemize}
+    \item Get rid of uncommitted changes temporarily
+      \begin{shell}
+        \$ git stash
+      \end{shell}
+    \item Resets your working copy to the last committed version $C$
+    \item Creates a ``stash commit'' whose parent is $C$
+    \item Puts the stash commit on a stack
+    \item Top-most stash commit can be applied again using
+      \begin{shell}
+        \$ git stash pop
+      \end{shell}
+  \end{itemize}
+\end{frame}
 \begin{frame}{Rebase Your Branch on Other Branch}
   \begin{itemize}
     \item Most complex operation in git:
@@ -424,259 +499,6 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{If Something Goes Wrong}
-  Things go wrong if changes conflict. You can then:
-  \begin{enumerate}
-    \item Fix the conflicts, then
-      \begin{shell}
-        \$ git add <changed files>\\
-        \$ git \{rebase|merge|...\} --continue
-      \end{shell}
-    \item Stop the operation
-      \begin{shell}
-        \$ git \{rebase|merge|...\} --abort
-      \end{shell}
-    \item Undo broken rebases, merges etc:
-      \begin{shell}
-        \$ git reflog\\
-        \$ git checkout HEAD@\{1\}
-      \end{shell}
-  \end{enumerate}
-\end{frame}
-
-\begin{frame}{Stashing Your Work}
-  \begin{itemize}
-    \item Get rid of uncommitted changes temporarily
-      \begin{shell}
-        \$ git stash
-      \end{shell}
-    \item Resets your working copy to the last committed version $C$
-    \item Creates a ``stash commit'' whose parent is $C$
-    \item Puts the stash commit on a stack
-    \item Top-most stash commit can be applied again using
-      \begin{shell}
-        \$ git stash pop
-      \end{shell}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Distributing Your Changes}
-  \begin{itemize}
-    \item Upload changes in your branch ``featureA'' to origin
-      \begin{shell}
-        \$ git push origin featureA
-      \end{shell}
-    \item Does not work if featureA is changed on origin, in this case fetch
-      and merge/rebase first
-    \item Does not work if you deleted commits which were on origin, in this
-      case force the update (be careful!):
-      \begin{shell}
-        \$ git push -f origin featureA
-      \end{shell}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Creating a new repository}
-  In the working directory of your project, type
-  \begin{shell}
-    \$ git init
-  \end{shell}
-\end{frame}
-\begin{frame}{Tracking files}
-  \begin{shell}
-    \$ git add <path>
-  \end{shell}
-\end{frame}
-\begin{frame}{Committing changes}
-  \begin{shell}
-    \$ git commit
-  \end{shell}
-\end{frame}
-\begin{frame}{Excursion: File states}
-  \begin{figure}
-    \includegraphics[width=9cm]{images/files}
-    \caption{from Scott Schacon's \enquote{Pro Git} CC-BY-NC-SA 3.0}
-  \end{figure}
-\end{frame}
-\begin{frame}{Checking the status}
-  \begin{shell}
-    \$ git status
-  \end{shell}
-\end{frame}
-\begin{frame}{Staging changes}
-So, before committing you have to stage a file
-  \begin{shell}
-\$ vi paper.tex\\
-\$ git add paper.tex\\
-\$ git commit
-  \end{shell}
-  or in one go
-  \begin{shell}
-    \$ git commit -a
-  \end{shell}
-\end{frame}
-\begin{frame}{Visualizing the history}
-  \begin{block}{For a quick look}
-    \begin{shell}
-      \$ git log
-    \end{shell}
-  \end{block}
-
-  \begin{block}{GUIs}
-    \begin{itemize}
-      \item gitg
-      \item gitk
-      \item giggle
-      \item tig
-      \item \ldots
-    \end{itemize}
-  \end{block}
-\end{frame}
-\begin{frame}{Branches}
-  \begin{columns}[onlytextwidth]
-    \column{0.7\textwidth}
-      To explore an idea without messing with the
-      original work, you can create a branch off of it \ldots
-
-      \begin{shell}
-        \$ git branch fancy-idea\\
-        \$ git checkout fancy-idea
-      \end{shell}
-
-      \visible<2->{
-        and commit changes related to that idea
-        \begin{shell}
-          \$ git commit \ldots
-        \end{shell}
-      }
-
-      \visible<3->{
-        Branches are cheap, so don't bother creating as many as you like.
-      }
-
-    \column{0.3\textwidth}
-      \centering
-      \begin{tikzpicture}
-        \node[commit, circle, draw] (root) at (0,0) {};
-        \visible<3->{
-          \node[commit] (c1) at (0,1.5) {};
-        }
-
-        \visible<2->{
-          \node[commit] (b1) at (1,1) {};
-          \node[commit] (b2) at (1,2) {};
-          \draw (root.north) edge[connection, out=90, in=270] (b1.south);
-          \draw[connection] (b1) -- (b2);
-        }
-
-        \visible<3->{
-          \draw[connection] (root) -- (c1);
-        }
-      \end{tikzpicture}
-  \end{columns}
-\end{frame}
-\begin{frame}{Merging changes}
-  \begin{columns}[onlytextwidth]
-    \column{0.7\textwidth}
-      If your changes are ready for prime time, merge them into your master
-      branch:
-
-      \visible<2->{
-        \begin{shell}
-          \$ git checkout master\\
-          \$ git merge fancy-idea
-        \end{shell}
-
-        In this particular case, a \emph{merge commit} will be created.
-      }
-
-      \visible<3->{
-        \vspace{1em}
-        If merging was successful, the old branch can be removed
-
-        \begin{shell}
-          \$ git branch -D fancy-idea
-        \end{shell}
-      }
-
-    \column{0.3\textwidth}
-      \centering
-      \begin{tikzpicture}
-        \node[commit, circle, draw] (root) at (0,0) {};
-        \node[commit] (c1) at (0,1.5) {};
-        \node[commit] (b1) at (1,1) {};
-        \node[commit] (b2) at (1,2) {};
-
-        \draw (root.north) edge[connection, out=90, in=270] (b1.south);
-        \draw[connection] (root) -- (c1);
-        \draw[connection] (b1) -- (b2);
-
-        \visible<2->{
-          \node[commit] (c2) at (0,3) {};
-          \draw (b2.north) edge[connection, out=90, in=270] (c2.south);
-          \draw[connection] (c1) -- (c2);
-        }
-      \end{tikzpicture}
-  \end{columns}
-\end{frame}
-\begin{frame}{Collaborating with others}
-  \begin{itemize}
-    \item Until now, everything happened on our local machine
-    \item To share changes with others you can
-      \begin{itemize}
-        \item Send patches
-        \item \emph{pull} from a remote repository
-        \item \emph{push} from a remote repository
-      \end{itemize}
-    \item Remotes does not have to be a single server instance
-    \item Different workflows can be easily modeled
-  \end{itemize}
-\end{frame}
-\begin{frame}{Remote repositories}
-  \begin{block}{Cloning repositories}
-    \begin{shell}
-      \$ git clone \{file,ssh,https\}://foo.server.com/foo.git
-    \end{shell}
-  \end{block}
-
-  \begin{block}{Adding additional repositories}
-    \begin{shell}
-      \$ git remote add foo https://foo.server.com/foo.git
-    \end{shell}
-  \end{block}
-
-  \begin{block}{Syncing changes}
-    \begin{shell}
-      \$ git pull [<remote> <branch>]\\
-      \$ git push [<remote> <local-branch>:<remote-branch>]
-    \end{shell}
-  \end{block}
-\end{frame}
-%\begin{frame}{Hosting repositories}
-  %\begin{itemize}
-    %\item Some directory on a file share such as NFS
-    %\item Simple SSH-based access or Gitolite
-    %\item Third-party provider, e.g. GitHub, Bitbucket, Google Code,
-      %SourceForge\ldots
-  %\end{itemize}
-%\end{frame}
-%\begin{frame}{Best practices}
-  %\begin{itemize}
-    %\item Write descriptive commit messages and keep 50/70 limits
-    %\item Check the status before committing
-    %\item Think twice before running
-      %\begin{shell}\$ git commit -a\end{shell}
-  %\end{itemize}
-%\end{frame}
-
-\section{Advanced Git features}
-
-\begin{frame}{}
-  \begin{center}
-    \huge\bfseries
-    \textcolor{KITblack}{Advanced Git operations}
-  \end{center}
-\end{frame}
 \begin{frame}{Manipulating the Git object database}
   If you collaborate heavily with your peers, you'll want to have a
   \enquote{clean} history of changes, e.g.
