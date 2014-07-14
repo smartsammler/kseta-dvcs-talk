@@ -99,7 +99,8 @@
 
 \graphicspath{{../../common/}}
 
-\TitleImage[width=6.5cm]{images/git-icon}
+% TODO: schoeneres Logo
+\TitleImage[width=4cm]{images/octocat.png}
 %}}}
 
 %}}}
@@ -441,9 +442,6 @@
 \end{frame}
 
 
-%\begin{frame}{Best practices}
-%\end{frame}
-
 % after group session
 \section{Advanced Git Features}
 
@@ -499,240 +497,16 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Manipulating the Git object database}
-  If you collaborate heavily with your peers, you'll want to have a
-  \enquote{clean} history of changes, e.g.
-
-  \begin{itemize}
-    \item Concise commit messages
-    \item One commit per logical change
-    \item A series of commits leading to a bigger change
-  \end{itemize}
-\end{frame}
-\begin{frame}{Fixing the last commit}
-  \begin{block}{Change author and message}
+\begin{frame}{Other Interesting Commands}
     \begin{shell}
-      \$ git commit --amend
+      \$ git commit --amend \\
+			\$ git add --patch/-p \\
+			\$ git gui \\
+			\$ git rebase -i \\
     \end{shell}
-  \end{block}
 \end{frame}
-\begin{frame}{Picking cherries}
-  \begin{block}{Pull individual commits into a branch}
-    \begin{shell}
-      \$ git cherry-pick f023bac
-    \end{shell}
-  \end{block}
-\end{frame}
-\begin{frame}{Partial staging}
-  \begin{block}{Staging only relevant parts of a change}
-    \begin{shell}
-      git add -p/--patch
-    \end{shell}
-  \end{block}
-\end{frame}
-\begin{frame}{Stash intermediate changes away}
-  \begin{block}{Cleaning the working directory temporarily}
-    \begin{shell}
-      \$ git stash "Descriptive message"\\
-      \$ ... do something else\\
-      \$ git stash pop
-    \end{shell}
-  \end{block}
-\end{frame}
-\begin{frame}{Merge bubbles}
-  Merging branches that developed independently can end up nasty \ldots
-
-  \begin{figure}
-    \centering
-    \includegraphics[width=8cm]{images/wide-gitk}
-    \caption{\enquote{Successful} octopus merge.}
-  \end{figure}
-  \vfill
-  {\footnotesize Image from: \url{http://blog.spearce.org/2007/07/difficult-gitk-graphs.html}}
-\end{frame}
-\begin{frame}{Rebasing branches}
-  \begin{columns}[onlytextwidth]
-    \column{0.7\textwidth}
-    This can be reduced by rebasing one branch on top of the other
-    \begin{shell}
-      \$ git checkout some-feature\\
-      \visible<2->{\$ git rebase master}
-    \end{shell}
-    \visible<3->{No merge commit, clean history.}
-
-    \column{0.3\textwidth}
-      \centering
-      \begin{tikzpicture}
-
-        \draw[connection] (root) -- (c1);
-        \draw[connection] (b1) -- (b2);
-
-        \visible<1>{
-          \node[commit, circle, draw] (root) at (0,0) {};
-          \node[commit] (c1) at (0,1.5) {};
-          \node[commit] (c2) at (0,3) {};
-          \node[commit, fill=syntax-number] (b1) at (1,1) {};
-          \node[commit, fill=syntax-green!50] (b2) at (1,2) {};
-
-          \draw[connection] (c1) -- (c2);
-          \draw (root.north) edge[connection, out=90, in=270] (b1.south);
-          \draw (b2.north) edge[connection, out=90, in=270] (c2.south);
-        }
-
-        \visible<2->{
-          \node[commit, circle, draw] (root) at (0,0) {};
-          \node[commit] (c1) at (0,1) {};
-          \node[commit, fill=syntax-number] (b1) at (1,2) {};
-          \node[commit, fill=syntax-green!50] (b2) at (1,3) {};
-          \draw (c1.north) edge [connection, out=90, in=270] (b1.south);
-        }
-
-      \end{tikzpicture}
-  \end{columns}
-\end{frame}
-\begin{frame}{Re-writing the history}
-  \begin{columns}[onlytextwidth]
-    \column{0.7\textwidth}
-      Manipulate the change history by rebasing using the
-      \texttt{-i/--interactive} switch
-
-      \begin{itemize}
-        \item \visible<2->{Drop commits}
-        \item \visible<3->{Re-order commits}
-        \item \visible<4->{Squash several commits into one}
-        \item \visible<5->{Edit commits}
-      \end{itemize}
-
-      \visible<6->{
-        \begin{shell}
-        \$ git rebase -i HEAD\textasciitilde 4
-        \end{shell}
-      }
-
-    \column{0.3\textwidth}
-      \centering
-      \begin{tikzpicture}
-        % Drop commits
-        \visible<1>{
-          \node[commit] (c1) at (0,0) {};
-          \draw[connection] (c1) -- (c2);
-        }
-
-        \visible<2->{
-          \node[commit, opacity=0.5] (c1) at (0,0) {};
-        }
-
-        % Re-order commits
-        \visible<1-2>{
-          \node[commit, fill=syntax-number] (c2) at (0,1) {};
-          \node[commit, fill=syntax-green!50] (c3) at (0,2) {};
-        }
-
-        \visible<3->{
-          \node[commit, fill=syntax-green!50] (c2) at (0,1) {};
-          \node[commit, fill=syntax-number] (c3) at (0,2) {};
-        }
-
-        % Squash commits
-        \visible<1-3>{
-          \node[commit, fill=KITgreen] (c5) at (0,4) {};
-          \node[commit, fill=KITyellow] (c4) at (0,3) {};
-          \draw[connection] (c4) -- (c5);
-        }
-
-        \visible<4->{
-          \node[shape=circle split, commit,
-                circle split part fill={KITgreen,KITyellow}] (c4) at (0,3)
-              {\nodepart{lower}};
-        }
-
-        \draw[connection] (c2) -- (c3);
-        \draw[connection] (c3) -- (c4);
-      \end{tikzpicture}
-  \end{columns}
-\end{frame}
-\begin{frame}{Best practices}
-  \begin{itemize}
-    \item Keep a clean history by re-writing the history of your local branch
-    \item Never, ever re-write the history of a public branch (Once pushed,
-      a change is sacred)
-  \end{itemize}
-\end{frame}
-
 
 %\section{Beyond Source Control}
-
-%\begin{frame}{}
-  %\begin{center}
-    %\huge\bfseries
-    %\textcolor{KITblack}{Beyond version control}
-  %\end{center}
-%\end{frame}
-%\begin{frame}{Deployment, Continous Integration}
-  %\begin{block}{post-receive hooks}
-    %\begin{description}
-      %\item[what] Use post-receive hooks to trigger actions, e.g. running
-        %builds and tests, deploy software, \ldots
-      %\item[where] \texttt{\$REPO/.git/hooks}
-      %\item[score]\score{1}{5}
-    %\end{description}
-  %\end{block}
-%\end{frame}
-%\begin{frame}{Blogging}
-  %\begin{block}{GitHub pages + Jekyll}
-    %\begin{description}
-      %\item[what] Blog hosting on GitHub via Git and Jekyll
-      %\item[where] \url{pages.github.com}
-      %\item[score]\score{2}{5}
-    %\end{description}
-  %\end{block}
-%\end{frame}
-%\begin{frame}{Wiki}
-  %\begin{block}{Gollum + Smeagol}
-    %\begin{description}
-      %\item[what] Git backend for a wiki with Markdown formatting
-      %\item[where] \url{github.com/gollum/gollum} and
-        %\url{github.com/rubyworks/smeagol}
-      %\item[score]\score{2}{5}
-    %\end{description}
-  %\end{block}
-%\end{frame}
-%\begin{frame}{Backups}
-  %\begin{block}{Bup}
-    %\begin{description}
-      %\item[what] Uses Git's packfile format to store backups
-      %\item[where] \url{github.com/bup/bup}
-      %\item[score]\score{2}{5}
-    %\end{description}
-  %\end{block}
-%\end{frame}
-%\begin{frame}{Managing large files}
-  %\begin{block}{git-annex}
-    %\begin{description}
-      %\item[what] Manages large data sets across remotes
-      %\item[where] \url{git-annex.branchable.com}
-      %\item[score]\score{4}{5}
-    %\end{description}
-  %\end{block}
-%\end{frame}
-%\begin{frame}{Bug tracking}
-  %\begin{block}{ticgit}
-    %\begin{description}
-      %\item[what] Keep tickets in a separate branch and sync across repos
-      %\item[where] \url{github.com/jeffWelling/ticgit}
-      %\item[score]\score{4}{5}
-    %\end{description}
-  %\end{block}
-%\end{frame}
-%\begin{frame}{Text-based slides}
-  %\begin{block}{git-slides}
-    %\begin{description}
-      %\item[what] git-slides (together with Vim)
-      %\item[where] \url{github.com/gelisam/git-slides}
-      %\item[score]\score{5}{5}
-    %\end{description}
-  %\end{block}
-%\end{frame}
 
 
 \section{Appendix}
@@ -741,30 +515,17 @@
   \begin{columns}[T,onlytextwidth]
     \column{0.7\textwidth}
       \begin{itemize}
-        \item \texttt{\$ man git} \ldots\  just kidding
-        \item Free Pro Git book at \url{git-scm.com/book}
-        \item Different aspects from beginners to pros: \url{gitready.com}
-        \item Git cheat sheet: \url{ndpsoftware.com/git-cheatsheet.html}
-        \item Interactive walkthrough: \url{gitimmersion.com}
+        \item \texttt{\$ man git} %\ldots\  just kidding
+        \item Free Pro Git book at \url{http://git-scm.com/book}
+        \item Different aspects from beginners to pros: \url{http://gitready.com}
+        \item Git cheat sheet: \url{http://www.cheat-sheets.org/saved-copy/git-cheat-sheet.pdf}
+				\item Interactive git tutorial: \url{https://try.github.io}
+				\item Get these slides from: \url{http://github.com/ksetagit/kseta-dvcs-talk}\\
       \end{itemize}
-
     \column{0.3\textwidth}
       \centering
       \includegraphics[width=1.5cm]{images/pro-git}
-      \vspace{2em}
-      \includegraphics[width=3cm]{images/gcs}
   \end{columns}
-\end{frame}
-\begin{frame}{}
-  \vfill
-  \begin{center}
-    \huge\bfseries
-    \textcolor{KITblack}{Thanks for your attention!}
-  \end{center}
-
-  \vfill
-  Get these slides from: \url{github.com/matze/kseta-dvsc-talk}\\
-  Title logo by Jason Long licensed under CC-BY-3.0
 \end{frame}
 
 \end{document}
