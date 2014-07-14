@@ -322,14 +322,13 @@
       \end{shell}
     \item Show changes to current version
       \begin{shell}
-        \$ git diff <paste SHA key>
+				\$ git diff <paste SHA key>
       \end{shell}
     \item Check out old version
       \begin{shell}
         \$ git checkout <paste SHA key>
       \end{shell}
-      Note that this does \emph{not change your branch}
-    \item Reset your master to the old version
+    \item Reset your master to the old version and delete history
       \begin{shell}
         \$ git reset --hard <paste SHA key>
       \end{shell}
@@ -347,7 +346,7 @@
   \begin{enumerate}
     \item Clone a repository
       \begin{shell}
-        \$ git clone Repository-URL
+        \$ git clone repository-URL/path
       \end{shell}
     \item Copies the complete history of all branches to your disk
     \item Stores the cloning source as the \emph{remote} ``origin''
@@ -369,51 +368,37 @@
       server, but leaves local labels unchanged.
     \item Decide what to do:
       \begin{itemize}
-         \item Cherry-pick a commit from a different branch
          \item Fast-forward your branch if you did not make changes
          \item Merge a remote branch into your branch
          \item Rebase your branch on top of a remote branch
+         \item Cherry-pick a commit from a different branch
       \end{itemize}
   \end{enumerate}
 \end{frame}
 
-\begin{frame}{Cherry-Picking}
-  \begin{itemize}
-    \item Take a commit from another branch and apply it to yours as well
-      \begin{shell}
-        \$ git cherry-pick <SHA>
-      \end{shell}
-    \item Pre-condition is that you did not change same lines
-    \item Git keeps track of commits by SHA and can ignore double commits
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Fast-Forward}
-  \begin{itemize}
-    \item Moves your branch label (e.g. ``master'') to the current tip (e.g.
-      ``origin/master'') of the branch
-      \begin{shell}
-        \$ git merge --ff-only origin/branchname
-      \end{shell}
-    \item Pre-condition is that you did not make any (diverging) commits
-  \end{itemize}
-\end{frame}
-
 \begin{frame}{Merge Other Branch Into Yours}
   \begin{itemize}
-    \item Creates new commit which includes both changes
+		\item Trivial merge: fast-forward
+		\item Non-trivial: creates new commit which includes both changes
       \begin{shell}
         \$ git merge origin/master
       \end{shell}
-    \item Almost always works, but may result in conflicts if same lines
+		\item Almost always works, but may result in \emph{conflicts} if same lines
       changed in both branch heads
     \item Note that you can also do
       \begin{shell}
         \$ git pull
       \end{shell}
-      which is the same as a \emph{fetch} and a consecutive \emph{merge}.
+      which is the same as a \emph{fetch} and a consecutive \emph{merge}
   \end{itemize}
 \end{frame}
+
+\begin{frame}
+	\frametitle{Best Practice Workflow}
+	\includegraphics[height=\textheight]{images/master-develop-feature-branches.png}
+	% TODO: Bild abschneiden
+\end{frame}
+
 
 \begin{frame}{Rebase Your Branch on Other Branch}
   \begin{itemize}
@@ -425,6 +410,17 @@
     \item Pre-condition is that changes can be applied to new parent
     \item Pro: Does not result in a merge-commit
     \item Contra: May create cascades of conflicts during rebase
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Cherry-Picking}
+  \begin{itemize}
+    \item Take a commit from another branch and apply it to yours as well
+      \begin{shell}
+        \$ git cherry-pick <SHA>
+      \end{shell}
+    \item Pre-condition is that you did not change same lines
+    \item Git keeps track of commits by SHA and can ignore double commits
   \end{itemize}
 \end{frame}
 
