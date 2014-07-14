@@ -91,10 +91,10 @@
 \makeatother
 %}}}
 %{{{ Meta
-\title{Distributed version control and why \emph{you} want to use it}
-\author{M. Vogelgesang}
-\subtitle{Matthias Vogelgesang}
-\institute{Institute for Data Processing and Electronics}
+\title{Version Control with Git}
+\author{Eileen K\"uhn, David Kunz, Sarah M\"uller, Robin Roth}
+\subtitle{Eileen K\"uhn, David Kunz, Sarah M\"uller, Robin Roth}
+\institute{KSETA Doktorandenworkshop, 22.07.2014}
 \date{Oct.~17\textsuperscript{th} 2013}
 
 \graphicspath{{../../common/}}
@@ -107,7 +107,7 @@
 \begin{document}
 \maketitle
 
-\section{Version Control}
+\section{Motivation}
 
 \begin{frame}{Plead guilty!}
   It's easy to copy digital content, so why not re-create it over and over
@@ -140,7 +140,7 @@
     \item No meta data about \emph{what} was changed \emph{when} by
       \emph{whom}
     \item You lose track of what's going on
-    \item You cannot roll-back to a working state
+    \item You cannot easily roll-back to a working state
     \item Poor solution for collaboration
   \end{itemize}
 \end{frame}
@@ -155,69 +155,19 @@
   \end{block}
 \end{frame}
 
-\section{Distributed Version Control}
-
-\begin{frame}{Centralized version control systems}
-  \begin{block}{Implementations}
-    \begin{itemize}
-      \item File-based: RCS
-      \item Client-Server architecture: CVS, SVN, \ldots
-    \end{itemize}
-  \end{block}
-
-  \pause
-
-  \begin{block}{Problems}
-    \begin{itemize}
-      \item Centralized systems require a server
-      \item Interaction with a repository can be painfully slow
-      \item Setup and maintenance issues
-      \item Collaborating requires a lot of effort
-    \end{itemize}
-  \end{block}
-\end{frame}
-\begin{frame}{Distributed version control}
-  \begin{block}{Cloned repositories}
-    \begin{itemize}
-      \item Local setup
-      \item Blazingly fast operations
-      \item \enquote{Airplane coding}
-    \end{itemize}
-  \end{block}
-  \begin{block}{Sharing is an inherent feature}
-    \begin{itemize}
-      \item DVCS are built around the idea of sharing
-      \item Cryptographic hashing of content assures integrity
-      \item Easy branching and merging of changes between peers
-    \end{itemize}
-  \end{block}
-\end{frame}
-\begin{frame}{Distributed version control \emph{systems}}
-  Mercurial, Bazaar, SVK, Monotone, BitKeeper, \textbf{Git}, Darcs, Fossil, GNU
-  arch, Arx, Plastic SCM
-\end{frame}
 \begin{frame}{Why Git?}
   \begin{columns}[T,onlytextwidth]
-    \column{0.5\textwidth}
-      \begin{block}{Pros}
+    \column{0.7\textwidth}
         \begin{itemize}
           \item De-facto standard for open source software
-          \item Probably the fastest DVCS out there
-          \item GitHub has more sex appeal than sf.net
+          \item Probably the fastest version control system out there
+          \item GitHub: web based collaboration platform
+					\item Works well both with central and distributed repositories
+					\item Easy to learn
         \end{itemize}
-      \end{block}
-
-      \begin{block}{Cons}
-        \begin{itemize}
-          \item Command line interface can be a bit inconsistent
-          \item Git is a toolbox with much freedom and little limits
-        \end{itemize}
-      \end{block}
-    \column{0.5\textwidth}
+    \column{0.3\textwidth}
       \centering
-      \includegraphics[width=4.0cm]{images/sf.png}
-      \vspace{1em}
-      \includegraphics[width=4.0cm]{images/github.png}
+      \includegraphics[width=4.0cm]{images/octocat.png}
   \end{columns}
 \end{frame}
 
@@ -228,42 +178,6 @@
     \huge\bfseries
     \textcolor{KITblack}{Git basics}
   \end{center}
-\end{frame}
-%\begin{frame}{Getting started}
-  %\begin{block}{Installation}
-    %\begin{itemize}
-      %\item Debian/Ubuntu: \texttt{apt-get install git-core}
-      %\item openSUSE/SLES: \texttt{zypper install git-core}
-      %\item Fedora/RHEL/CentOS/SL: \texttt{yum install git}
-      %\item Mac: \texttt{port install git-core} or install from
-      %\url{http://git-scm.com/download/mac}
-      %\item Windows: install from \url{http://git-scm.com/download/win}
-    %\end{itemize}
-  %\end{block}
-%\end{frame}
-
-\begin{frame}{Commits}
-  Everytime you make a major change, you create a \alert{commit} containing:
-  \begin{itemize}
-    \item added/removed lines in files
-    \item a comment summarizing what was changed
-    \item an author
-    \item a date
-    \item a checksum (SHA-hash)
-    \item a reference to the previous state of your files (parent(s))
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Commit Graphs}
-  Since all commits have a parent, they form a \alert{directed graph} without
-  cycles (DAG).
-
-  \begin{itemize}
-    \item The first commit does not have a parent. It creates a \alert{repository}.
-    \item Multiple commits can have the same parent (e.g. when coworkers work on the same code).
-    \item Commits can have multiple parents if the two diverging changes are merged.
-    \item Commits can have \alert{labels}. Labels can be e.g. branch names version tags.
-  \end{itemize}
 \end{frame}
 
 \begin{frame}{Single User Workflow}
@@ -284,8 +198,35 @@
           \end{shell}
       \end{enumerate}
   \end{enumerate}
-  \includegraphics[width=\linewidth]{pics/init0.png}
+	\begin{center}
+	\includegraphics[width=.8\linewidth]{pics/init0.png}
+	\end{center}
 \end{frame}
+
+\begin{frame}{Commits}
+  Everytime you make a major change, you create a \alert{commit} containing:
+  \begin{itemize}
+    \item added/removed lines in files
+    \item a comment summarizing what was changed
+    \item an author
+    \item a date
+    \item a checksum (SHA-hash)
+    \item a reference to the previous state of your files (parent(s))
+  \end{itemize}
+\end{frame}
+
+% \begin{frame}{Commit Graphs}
+%   Since all commits have a parent, they form a \alert{directed graph} without
+%   cycles (DAG).
+
+%   \begin{itemize}
+%     \item The first commit does not have a parent. It creates a \alert{repository}.
+%     \item Multiple co mmits can have the same parent (e.g. when coworkers work on the same code).
+%     \item Commits can have multiple parents if the two diverging changes are merged.
+%     \item Commits can have \alert{labels}. Labels can be e.g. branch names version tags.
+%   \end{itemize}
+% \end{frame}
+
 
 \begin{frame}[t]{Single User Workflow}
   \begin{enumerate}
@@ -307,9 +248,9 @@
       \end{enumerate}
   \end{enumerate}
   \begin{overprint}
-  \includegraphics<1>[width=\linewidth]{pics/commit0.png}
-  \includegraphics<2>[width=\linewidth]{pics/commit1.png}
-  \includegraphics<3>[width=\linewidth]{pics/commit2.png}
+		\includegraphics<1>[width=.8\linewidth]{pics/commit0.png}
+		\includegraphics<2>[width=.8\linewidth]{pics/commit1.png}
+		\includegraphics<3>[width=.8\linewidth]{pics/commit2.png}
     \end{overprint}
 \end{frame}
 
