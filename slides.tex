@@ -216,8 +216,7 @@
 \end{frame}
 
 % \begin{frame}{Commit Graphs}
-%   Since all commits have a parent, they form a \alert{directed graph} without
-%   cycles (DAG).
+
 
 %   \begin{itemize}
 %     \item The first commit does not have a parent. It creates a \alert{repository}.
@@ -257,16 +256,17 @@
 \begin{frame}{When to commit}
   \begin{itemize}
     \item Small logical units
-    \item About 3 times an hour
-    \item Allows you to retrace your steps
-  \end{itemize}
-\end{frame}
+    \item About 3 times an hour \\
+		\item[$\Rightarrow$] Allows you to retrace your steps
+			%TODO: add pic
+   \end{itemize}
+ \end{frame}
 
 \begin{frame}{Branching}
   \begin{itemize}
     \item Working on independent features at the same time
     \item Trying incompatible changes
-    \item Quick and dirty work for a paper
+    \item Quick and dirty work without changing the master branch
   \end{itemize}
 \end{frame}
 
@@ -304,8 +304,7 @@
             \end{shell}
         \item Delete merged branches
             \begin{shell}
-                \alert<4>{\$ git branch -d featureA}\\
-                \alert<4>{\$ git branch -d featureB}
+                \alert<4>{\$ git branch -d featureA featureB}
             \end{shell}
     \end{itemize}
     \mbox{%
