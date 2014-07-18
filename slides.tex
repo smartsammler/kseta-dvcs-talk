@@ -151,6 +151,8 @@
 		\item Record (\emph{commit}) changes
 		\item Share changes with others
 		\item Roll-back to an earlier state
+		\item Implicit backup
+
 	\end{itemize}
 \end{frame}
 
@@ -175,7 +177,7 @@
 \begin{frame}{}
   \begin{center}
     \huge\bfseries
-    \textcolor{KITblack}{Git basics}
+    \textcolor{KITblack}{Git Basics}
   \end{center}
 \end{frame}
 
@@ -205,13 +207,13 @@
 % Live Demo 1
 
 \begin{frame}{Commits}
-  Everytime you make a major change, you create a \alert{commit} containing:
+  Everytime you make a change, you create a \alert{commit} containing:
   \begin{itemize}
     \item added/removed lines in files
     \item a comment summarizing what was changed
     \item an author
     \item a date
-    \item a checksum (SHA-hash)
+    \item a checksum (SHA-hash) to identify the commit
     \item a reference to the previous state of your files (parent(s))
   \end{itemize}
 \end{frame}
@@ -254,22 +256,28 @@
     \end{overprint}
 \end{frame}
 
-\begin{frame}{How to commit}
+\begin{frame}{How to commit} 
   \begin{itemize}
     \item Small logical units
-    \item About 3 times an hour 
+    \item Several times an hour 
 			%TODO: add pic
     \item Check the status before committing
-    \item Write descriptive commit messages and keep 50/70 limits
+    \item Write descriptive commit messages and keep 50/72 limits
 		\item[$\Rightarrow$] Allows you to retrace your steps
    \end{itemize}
  \end{frame}
 
 \begin{frame}{Branching}
   \begin{itemize}
-    \item Working on independent features at the same time
-    \item Trying incompatible changes
-    \item Quick and dirty work without changing the master branch
+		\item Keep master branch free from ``questionable'' code
+			\begin{itemize}
+				\item Working on independent features at the same time
+				\item Trying incompatible changes
+				\item Quick and dirty work without changing the master branch
+			\end{itemize}
+		\item Cheap, instant and easy
+		\item Create and destroy often
+		\item Integral part of a typical Git workflow
   \end{itemize}
 \end{frame}
 
@@ -303,6 +311,7 @@
         \item Merge your changes into master
             \begin{shell}
                 \alert<2>{\$ git merge featureA  \# fast forward}\\
+                \alert<2>{\$ git merge --no-ff featureA  \# }\\
                 \alert<3>{\$ git merge featureB  \# merge}
             \end{shell}
         \item Delete merged branches
@@ -311,6 +320,7 @@
             \end{shell}
     \end{itemize}
     \mbox{%
+			%TODO: Bilder fuer --no-ff
     \includegraphics<1>[width=\linewidth]{pics/branching5.png}
     \includegraphics<2>[width=\linewidth]{pics/branching6.png}
     \includegraphics<3>[width=\linewidth]{pics/branching7.png}
@@ -330,10 +340,6 @@
     \item Check out old version
       \begin{shell}
         \$ git checkout <paste SHA key>
-      \end{shell}
-    \item Reset your master to the old version and delete history
-      \begin{shell}
-        \$ git reset --hard <paste SHA key>
       \end{shell}
   \end{enumerate}
 \end{frame}
@@ -383,7 +389,7 @@
 \end{frame}
 
 \begin{frame}{Merge Other Branch Into Yours}
-  \begin{itemize}
+   \begin{itemize}
 		\item Trivial merge: fast-forward
 		\item Non-trivial: creates new commit which includes both changes
       \begin{shell}
@@ -397,7 +403,29 @@
       \end{shell}
       which is the same as a \emph{fetch} and a consecutive \emph{merge}
   \end{itemize}
+ \end{frame}
+
+\begin{frame}{Distributing Your Changes}
+  \begin{itemize}
+    \item Upload changes in your branch ``featureA'' to origin
+      \begin{shell}
+        \$ git push origin featureA
+      \end{shell}
+    \item Does not work if featureA is changed on origin, in this case fetch
+      and merge/rebase first
+    \item Does not work if you deleted commits which were on origin, in this
+      case force the update (be careful!):
+      \begin{shell}
+        \$ git push -f origin featureA
+      \end{shell}
+  \end{itemize}
 \end{frame}
+
+ \begin{frame}
+	 \frametitle{Group Exercises}
+	TODO 
+ \end{frame}
+ 
 
 \begin{frame}{If Something Goes Wrong}
   Things go wrong if changes conflict. You can then:
@@ -420,21 +448,6 @@
   \end{enumerate}
 \end{frame}
 
-\begin{frame}{Distributing Your Changes}
-  \begin{itemize}
-    \item Upload changes in your branch ``featureA'' to origin
-      \begin{shell}
-        \$ git push origin featureA
-      \end{shell}
-    \item Does not work if featureA is changed on origin, in this case fetch
-      and merge/rebase first
-    \item Does not work if you deleted commits which were on origin, in this
-      case force the update (be careful!):
-      \begin{shell}
-        \$ git push -f origin featureA
-      \end{shell}
-  \end{itemize}
-\end{frame}
 
 \begin{frame}
 	\frametitle{Best Practice Workflow}
