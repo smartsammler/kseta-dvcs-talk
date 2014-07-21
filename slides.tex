@@ -180,6 +180,24 @@
   \end{center}
 \end{frame}
 
+\begin{frame}{Configuration}
+  \begin{itemize}
+    \item{Tell git who you are}
+      \begin{shell}
+        \$ git config --global user.name <name>\\
+        \$ git config --global user.email <email>
+      \end{shell}
+    \item{Configure auto correct for git commands}
+      \begin{shell}
+        \$ git config --global help.autocorrect 1
+      \end{shell}
+    \item{Use colors to show git information}
+      \begin{shell}
+        \$ git config --global color.ui auto
+      \end{shell}
+  \end{itemize}
+\end{frame}
+
 \begin{frame}{Single User Workflow}
   \begin{enumerate}
     \item Create a repository and a branch ``master''
@@ -458,6 +476,10 @@
 
 % after group session
 
+\begin{frame}{How it works}
+	\includegraphics[width=\textwidth]{images/git_vocabulary.png}
+\end{frame}
+
 \begin{frame}
 	\frametitle{Best Practice Workflow}
 	\includegraphics[height=\textheight]{images/git-workflow.png}
@@ -468,7 +490,7 @@
 	\begin{itemize}
 		\item{Do commit early and often}
 		\item{Do not panic (as long as you commited [or even added] your work)}
-		\item{Do not change published history (rebase can be evil)}
+		\item{Do not change published history (reset/rebase can be evil)}
 		\item{Do divide your work into different repositories}
 		\item{Do useful commit messages}
 		\item{Do keep up to date}
