@@ -99,7 +99,6 @@
 
 \graphicspath{{../../common/}}
 
-% TODO: schoeneres Logo
 \TitleImage[width=4cm]{images/octocat.png}
 %}}}
 
@@ -223,7 +222,7 @@
 
 %   \begin{itemize}
 %     \item The first commit does not have a parent. It creates a \alert{repository}.
-%     \item Multiple co mmits can have the same parent (e.g. when coworkers work on the same code).
+%     \item Multiple commits can have the same parent (e.g. when coworkers work on the same code).
 %     \item Commits can have multiple parents if the two diverging changes are merged.
 %     \item Commits can have \alert{labels}. Labels can be e.g. branch names version tags.
 %   \end{itemize}
@@ -256,10 +255,10 @@
     \end{overprint}
 \end{frame}
 
-\begin{frame}{How to commit} 
+\begin{frame}{How to commit}
   \begin{itemize}
     \item Small logical units
-    \item Several times an hour 
+    \item Several times an hour
 			%TODO: add pic
     \item Check the status before committing
     \item Write descriptive commit messages and keep 50/72 limits
@@ -354,12 +353,13 @@
   \end{center}
 \end{frame}
 
-\begin{frame}{Cloning}
-  \begin{enumerate}
-    \item Clone a repository
-      \begin{shell}
-        \$ git clone repository-URL/path
-      \end{shell}
+\begin{frame}
+	\frametitle{Group Exercises}
+	\begin{itemize}
+		\item Clone a repository, possible protocols: https, ssh, git, file, \ldots
+		 \begin{shell}
+			 \$ git clone https://github.com/ksetagit/groupproject.git
+		 \end{shell}
     \item Copies the complete history of all branches to your disk
     \item Stores the cloning source as the \emph{remote} ``origin''
       \begin{shell}
@@ -367,7 +367,7 @@
         \$ git remote show origin
       \end{shell}
     \item \ldots{} now work as described before
-  \end{enumerate}
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Incorporate Changes of Collaborators}
@@ -412,7 +412,7 @@
         \$ git push origin featureA
       \end{shell}
     \item Does not work if featureA is changed on origin, in this case fetch
-      and merge/rebase first
+      and merge first
     \item Does not work if you deleted commits which were on origin, in this
       case force the update (be careful!):
       \begin{shell}
@@ -421,11 +421,16 @@
   \end{itemize}
 \end{frame}
 
- \begin{frame}
-	 \frametitle{Group Exercises}
-	TODO 
- \end{frame}
- 
+\begin{frame}
+	\frametitle{Group Tasks}
+	\begin{itemize}
+		\item Group tasks in Readme.md
+		\item Commit often
+		\item Push often
+	\end{itemize}
+
+\end{frame}
+
 
 \begin{frame}{If Something Goes Wrong}
   Things go wrong if changes conflict. You can then:
@@ -479,10 +484,6 @@
   \end{center}
 \end{frame}
 
-% TODO 
-% gitk
-% git gui
-
 % multiple remotes (pull workflow)
 
 \begin{frame}{Stashing Your Work}
@@ -525,10 +526,20 @@
 \end{frame}
 
 \begin{frame}{Other Interesting Commands}
+	  Append some changes to the last commit (use only if not pushed):
     \begin{shell}
       \$ git commit --amend \\
+    \end{shell}
+		Select only some of the changes to a file for a commit:
+    \begin{shell}
 			\$ git add --patch/-p \\
+    \end{shell}
+		Graphical tool to select changes to include in a commit:
+    \begin{shell}
 			\$ git gui \\
+    \end{shell}
+		Rewrite the history: reorder commits, combine them, \ldots:
+    \begin{shell}
 			\$ git rebase -i \\
     \end{shell}
 \end{frame}
