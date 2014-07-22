@@ -328,20 +328,21 @@
         \item Merge your changes into master
             \begin{shell}
                 \alert<2>{\$ git merge featureA  \# fast forward}\\
-                \alert<2>{\$ git merge --no-ff featureA  \# }\\
-                \alert<3>{\$ git merge featureB  \# merge}
+                \alert<3>{\$ git merge --no-ff featureA  \# }\\
+                \alert<4>{\$ git merge featureB  \# merge}
             \end{shell}
         \item Delete merged branches
             \begin{shell}
-                \alert<4>{\$ git branch -d featureA featureB}
+                \alert<5>{\$ git branch -d featureA featureB}
             \end{shell}
     \end{itemize}
     \mbox{%
 			%TODO: Bilder fuer --no-ff
     \includegraphics<1>[width=\linewidth]{pics/branching5.png}
     \includegraphics<2>[width=\linewidth]{pics/branching6.png}
-    \includegraphics<3>[width=\linewidth]{pics/branching7.png}
-    \includegraphics<4>[width=\linewidth]{pics/branching8.png}}
+    \includegraphics<3>[width=\linewidth]{pics/branching9.png}
+    \includegraphics<4>[width=\linewidth]{pics/branching7.png}
+    \includegraphics<5>[width=\linewidth]{pics/branching8.png}}
 \end{frame}
 
 \begin{frame}{Retracing Your Steps}
