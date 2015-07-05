@@ -1,7 +1,7 @@
 ## about
 
 This repository contains sources for an introductional talk about Git given at
-the [KSETA Doktoranden Workshop 2014](https://indico.scc.kit.edu/indico/abstractDisplay.py?abstractId=31&confId=48).
+the [KSETA Doktoranden Workshop 2015](https://indico.scc.kit.edu/indico/event/87/overview).
 
 ### license
 
