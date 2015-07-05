@@ -90,15 +90,15 @@
 \makeatother
 %}}}
 %{{{ Meta
-\title{Version Control with Git}
-\author{Eileen K\"uhn, David Kunz, Sarah M\"uller, Robin Roth}
-\subtitle{Eileen K\"uhn, David Kunz, Sarah M\"uller, Robin Roth}
-\institute{KSETA Doktorandenworkshop, 23.07.2014}
-\date{Jul.~23\textsuperscript{rd} 2014}
+\title{Git -- source code management}
+\author{Julian Gethmann}
+\subtitle{based on last years workshop by Eileen K\"uhn, David Kunz, Sarah M\"uller, Robin Roth}
+\institute{KSETA Doktorandenworkshop, 7.7.2015}
+\date{Jul.~7\textsuperscript{th} 2015}
 
 \graphicspath{{../../common/}}
 
-\TitleImage[width=4cm]{images/octocat.png}
+\TitleImage[width=4cm]{images/Git-Logo-2Color.eps}
 %}}}
 
 %}}}
@@ -120,12 +120,12 @@
           \includegraphics[width=4.5cm]{images/mrcs.png}
           \caption*{\enquote{One of these folders \emph{must} contain the latest
           version \ldots}}
-        \end{figure}
+         \end{figure}
     }
 
     \visible<3->{
       \column{0.5\textwidth}
-        \begin{figure}
+         \begin{figure}
           \centering
           \includegraphics[width=4.5cm]{images/reports.png}
           \caption*{\enquote{Here is the latest version of the
@@ -136,17 +136,22 @@
 \end{frame}
 \begin{frame}{Obvious disadvantages}
   \begin{itemize}
-    \item No meta data about \emph{what} was changed \emph{when} by
+    \ item No meta data about \emph{what} was changed \emph{when} by
       \emph{whom}
     \item You lose track of what's going on
     \item You cannot easily roll-back to a working state
-    \item Poor solution for collaboration
+    \item Poor solution for collaboration or work on different parts at different places
+  \end{itemize}
+  \begin{itemize}
+    \item This talk is a copy of the last years talk and doesn't have those problems eigther.
+    \item Why not?
   \end{itemize}
 \end{frame}
 \begin{frame}{Version control}
 	\begin{itemize}
 		\item \emph{Track} files
 		\item Record (\emph{commit}) changes
+		\item Work on different copies 
 		\item Share changes with others
 		\item Roll-back to an earlier state
 		\item Implicit backup
@@ -160,16 +165,16 @@
         \begin{itemize}
           \item De-facto standard for open source software
           \item Probably the fastest version control system out there
+	  \item Easy to learn, though feature rich
+	  \item Works well both with central and distributed repositories
           \item GitHub: web based collaboration platform
-					\item Works well both with central and distributed repositories
-					\item Easy to learn
         \end{itemize}
     \column{0.3\textwidth}
       \centering
       \includegraphics[width=4.0cm]{images/octocat.png}
   \end{columns}
 \end{frame}
-
+ 
 \section{Hands-on introduction}
 
 \begin{frame}{}
@@ -211,7 +216,7 @@
           \end{shell}
         \item Perform the commit
           \begin{shell}
-            \$ git commit -m "Added a README file"
+            \$ git commit -m "Add a README file"
           \end{shell}
       \end{enumerate}
   \end{enumerate}
@@ -261,7 +266,7 @@
           \end{shell}
         \item<alert@3> Perform the commit
           \begin{shell}
-            \$ git commit -m "Added project description"
+            \$ git commit %-m "Add project description"
           \end{shell}
       \end{enumerate}
   \end{enumerate}
@@ -273,14 +278,23 @@
 \end{frame}
 
 \begin{frame}{How to commit}
+  \begin{columns}[t]
+    \column{50mm}
   \begin{itemize}
     \item Small logical units
     \item Several times an hour
 			%TODO: add pic
     \item Check the status before committing
+      \begin{shell}
+	\$ git status
+      \end{shell}
     \item Write descriptive commit messages and keep 50/72 limits
 		\item[$\Rightarrow$] Allows you to retrace your steps
    \end{itemize}
+    \column{50mm}
+    \includegraphics[width=\textwidt]{images/18333fig0106-tn.png}
+    \url{http://git-scm.com/}
+  \end{columns}
  \end{frame}
 
 \begin{frame}{Branching}
@@ -316,6 +330,7 @@
     \includegraphics<4>[width=\linewidth]{pics/branching3.png}
     \includegraphics<5>[width=\linewidth]{pics/branching4.png}
     }
+  \href{http://pcottle.github.io/learnGitBranching/?NODEMO}{pcottle.github.io/learnGitBranching}
 \end{frame}
 
 \begin{frame}[t]{Branching}
@@ -349,6 +364,8 @@
     \item Check the log
       \begin{shell}
         \$ git log  \# copy the SHA-key
+	\$ git log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(re    set)' --abbrev-commit --date=relative
+	 \$ git log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(whi    te)%s%C(reset) %C(bold white)— %an%C(reset)' --abbrev-commit
       \end{shell}
     \item Show changes to current version
       \begin{shell}
@@ -372,11 +389,11 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Group Exercises}
+	\frametitle{Working at different places}
 	\begin{itemize}
 		\item Clone a repository, possible protocols: https, ssh, git, file, \ldots
 		 \begin{shell}
-			 \$ git clone https://github.com/ksetagit/groupproject.git
+			 \$ git clone https://github.com/smartsammler/kseta-dvcs-talk.git
 		 \end{shell}
     \item Copies the complete history of all branches to your disk
     \item Stores the cloning source as the \emph{remote} ``origin''
@@ -384,7 +401,6 @@
         \$ git remote show\\
         \$ git remote show origin
       \end{shell}
-    \item \ldots{} now work as described before
 	\end{itemize}
 \end{frame}
 
@@ -415,6 +431,10 @@
       \end{shell}
 		\item Almost always works, but may result in \emph{conflicts} if same lines
       changed in both branch heads
+      \begin{shell}
+        \$ git config --global mergetool.keepBackup false
+        \$ git mergetool
+      \end{shell}
     \item Note that you can also do
       \begin{shell}
         \$ git pull
@@ -432,21 +452,21 @@
     \item Does not work if featureA is changed on origin, in this case fetch
       and merge first
     \item Does not work if you deleted commits which were on origin, in this
-      case force the update (be careful!):
+      case don't try to force the update unless you know you are the only one:
       \begin{shell}
         \$ git push -f origin featureA
       \end{shell}
   \end{itemize}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Group Tasks}
-	\begin{itemize}
-		\item \url{https://github.com/ksetagit/groupproject.git}
-		\item Group tasks in Readme.md
-	\end{itemize}
-
-\end{frame}
+% \begin{frame}
+% 	\frametitle{Group Tasks}
+% 	\begin{itemize}
+% 		\item \url{https://github.com/ksetagit/groupproject.git}
+% 		\item Group tasks in Readme.md
+% 	\end{itemize}
+% 
+% \end{frame}
 
 
 \begin{frame}{If Something Goes Wrong}
@@ -455,13 +475,13 @@
     \item Fix the conflicts, then
       \begin{shell}
         \$ git add <changed files>\\
-        \$ git merge --continue
+        \$ git merge % --continue
       \end{shell}
-    \item Stop the operation
+    \item Stop th e operation
       \begin{shell}
         \$ git merge --abort
       \end{shell}
-    \item Undo broken merges:
+    \item Undo br oken merges:
 			% TODO: screenshot fuer reflog
       \begin{shell}
         \$ git reflog\\
@@ -501,18 +521,22 @@
     \column{0.7\textwidth}
       \begin{itemize}
         \item \texttt{\$ man git} %\ldots\  just kidding
+	\item git help <command>
         \item Free Pro Git book at \url{http://git-scm.com/book}
         \item Different aspects from beginners to pros: \url{http://gitready.com}
         \item Git cheat sheet: \url{http://www.cheat-sheets.org/saved-copy/git-cheat-sheet.pdf}
-				\item Interactive git tutorial: \url{https://try.github.io}
-				\item Get these slides from: \url{http://github.com/ksetagit/kseta-dvcs-talk}\\
+	\item Interactive git tutorial: \url{https://try.github.io}
+	\item Interactive git branching tutorial: \url{https://pcottle.github.io/learnGitBranching/}
+	\item Get these slides from: \url{https://github.com/smartsammler/kseta-dvcs-talk}\\
       \end{itemize}
     \column{0.3\textwidth}
       \centering
       \includegraphics[width=1.5cm]{images/pro-git}
   \end{columns}
+  \begin{itemize}
+    \item Download at \url{http://git-scm.com/downloads}
+  \end{itemize}<++>
 \end{frame}
-
 
 \section{Advanced Git Features}
 
@@ -584,9 +608,6 @@
 \end{frame}
 
 %\section{Beyond Source Control}
-
-
-\section{Appendix}
 
 \end{document}
 
