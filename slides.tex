@@ -1,7 +1,26 @@
-\documentclass[18pt,mathserif]{beamer}
+\documentclass{beamer}
+\listfiles
+
+\mode<presentation>
+{
+\usetheme[english,usefoot,KITtoc]{KIT}
+
+  \setbeamercovered{transparent}
+
+  %\setbeamertemplate{enumerate items}[ball]
+}
+
+%\usepackage[ngerman]{babel}
+
+\usepackage[utf8x]{inputenc}
+\usepackage[TS1,T1]{fontenc}
+\usepackage{microtype}
+
+\usepackage{pgfpages}
 
 %{{{ Settings
-\usetheme[english, titlepage0]{KIT}
+%\usetheme[english, titlepage0]{KIT}
+
 
 %{{{ Packages
 \usepackage{tikz}
@@ -88,17 +107,17 @@
   userdefinedwidth=#1]}
   {\end{mdframed}}
 \makeatother
-%}}}
+%%}}}
 %{{{ Meta
 \title{Git -- source code management}
 \author{Julian Gethmann}
-\subtitle{based on last years workshop by Eileen K\"uhn, David Kunz, Sarah M\"uller, Robin Roth}
+\subtitle{based on last years workshop by Eileen K\"uhn, David Kunz, Sarah M\"uller, Robin Roth/ github.com/ksetagit}
 \institute{KSETA Doktorandenworkshop, 7.7.2015}
 \date{Jul.~7\textsuperscript{th} 2015}
 
 \graphicspath{{../../common/}}
 
-\TitleImage[width=4cm]{images/Git-Logo-2Color.eps}
+\TitleImage[width=4cm]{images/Git-Logo-2Color.png}
 %}}}
 
 %}}}
@@ -136,14 +155,14 @@
 \end{frame}
 \begin{frame}{Obvious disadvantages}
   \begin{itemize}
-    \ item No meta data about \emph{what} was changed \emph{when} by
+    \item No meta data about \emph{what} was changed \emph{when} by
       \emph{whom}
     \item You lose track of what's going on
     \item You cannot easily roll-back to a working state
     \item Poor solution for collaboration or work on different parts at different places
   \end{itemize}
   \begin{itemize}
-    \item This talk is a copy of the last years talk and doesn't have those problems eigther.
+    \item This talk is a copy of the last year's talk and doesn't have those problems eigther.
     \item Why not?
   \end{itemize}
 \end{frame}
@@ -278,8 +297,8 @@
 \end{frame}
 
 \begin{frame}{How to commit}
-  \begin{columns}[t]
-    \column{50mm}
+  \begin{columns}[T,onlytextwidth]
+    \column{.6\textwidth}
   \begin{itemize}
     \item Small logical units
     \item Several times an hour
@@ -291,9 +310,9 @@
     \item Write descriptive commit messages and keep 50/72 limits
 		\item[$\Rightarrow$] Allows you to retrace your steps
    \end{itemize}
-    \column{50mm}
-    \includegraphics[width=\textwidt]{images/18333fig0106-tn.png}
-    \url{http://git-scm.com/}
+    \column{.3\textwidth}
+    \includegraphics[width=\textwidth]{images/18333fig0106-tn.png}\\
+    {\small \url{http://git-scm.com/}}
   \end{columns}
  \end{frame}
 
@@ -363,9 +382,9 @@
   \begin{enumerate}
     \item Check the log
       \begin{shell}
-        \$ git log  \# copy the SHA-key
-	\$ git log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(re    set)' --abbrev-commit --date=relative
-	 \$ git log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(whi    te)%s%C(reset) %C(bold white)— %an%C(reset)' --abbrev-commit
+        \$ git log  \# copy the SHA-key\\
+	%\$ git log --graph --all --format=format:'\%C(bold blue)\%h\%C(reset) - \%C(bold green)(\%ar)\%C(reset) \%C(white)\%s\%C(reset) \%C(bold white)— \%an\%C(reset)\%C(bold yellow)\%d\%C(reset)' --abbrev-commit --date=relative \\
+	 %\$ git log --graph --all --format=format:'\%C(bold blue)\%h\%C(reset) - \%C(bold cyan)\%aD\%C(reset) \%C(bold green)(\%ar)\%C(reset)\%C(bold yellow)\%d\%C(reset)\%n''          \%C(white)\%s\%C(reset) \%C(bold white)— \%an\%C(reset)' --abbrev-commit
       \end{shell}
     \item Show changes to current version
       \begin{shell}
@@ -410,7 +429,7 @@
       \begin{shell}
         \$ git fetch
       \end{shell}
-      Downloads all commits and labels (e.g. ``origin/master'') from the
+      Downloads all commits and labels (e.\,g. ``origin/master'') from the
       server, but leaves local labels unchanged.
     \item Decide what to do:
       \begin{itemize}
@@ -432,7 +451,7 @@
 		\item Almost always works, but may result in \emph{conflicts} if same lines
       changed in both branch heads
       \begin{shell}
-        \$ git config --global mergetool.keepBackup false
+        \$ git config --global mergetool.keepBackup false\\
         \$ git mergetool
       \end{shell}
     \item Note that you can also do
@@ -535,7 +554,7 @@
   \end{columns}
   \begin{itemize}
     \item Download at \url{http://git-scm.com/downloads}
-  \end{itemize}<++>
+  \end{itemize}
 \end{frame}
 
 \section{Advanced Git Features}
@@ -593,17 +612,29 @@
     \begin{shell}
       \$ git commit --amend \\
     \end{shell}
-		Select only some of the changes to a file for a commit:
-    \begin{shell}
-			\$ git add --patch/-p \\
-    \end{shell}
-		Graphical tool to select changes to include in a commit:
-    \begin{shell}
-			\$ git gui \\
-    \end{shell}
 		Rewrite the history: reorder commits, combine them, \ldots:
     \begin{shell}
 			\$ git rebase -i \\
+    \end{shell}
+    		Pull without unneccessary merge commits
+    \begin{shell}
+			\$ git pull --rebase \\
+    \end{shell}
+\end{frame}
+
+\begin{frame}{Other Interesting Commands}
+		Graphical tool to select changes to include in a commit:
+    \begin{shell}
+			\$ git gui \\
+			\$ gitk
+    \end{shell}
+    		Show an old version of a file
+    \begin{shell}
+			\$ git show <hash>:<filename> \\
+    \end{shell}
+		Select only some of the changes to a file for a commit:
+    \begin{shell}
+			\$ git add --patch/-p \\
     \end{shell}
 \end{frame}
 
